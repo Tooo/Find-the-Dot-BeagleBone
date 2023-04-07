@@ -7,6 +7,7 @@
 #include "buzzer.h"
 #include "accelerometer.h"
 #include "digitDisplay.h"
+#include "output.h"
 
 // Initialize/cleanup the module's data structures.
 static void main_init(void);
@@ -25,12 +26,13 @@ static void main_init(void)
     Accelerometer_init();
     Buzzer_init();
     DigitDisplay_init();
-    
+    Output_init();
     
 }
 
 static void main_cleanup(void)
 {
+    Output_cleanup();
     DigitDisplay_cleanup();
     Buzzer_cleanup();
     Accelerometer_cleanup();

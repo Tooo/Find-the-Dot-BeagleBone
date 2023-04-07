@@ -14,8 +14,8 @@ void Accelerometer_cleanup(void);
 void Accelerometer_readAndCalculateValues(void);
 
 // Get values from accelerometer.
-int Accelerometer_getX(void);
-int Accelerometer_getY(void);
-int Accelerometer_getZ(void);
+double Accelerometer_getX(void);
+double Accelerometer_getY(void);
+double Accelerometer_getZ(void);
 
 #endif

@@ -75,16 +75,6 @@ void DigitDisplay_setDigit(int digit)
     displayDigit = digit;
 }
 
-
-static void* DigitDisplay_threadFunction(void* arg)
-{
-    (void)arg;
-    while(!stopping) {
-        DigitDisplay_setDigitHardware(displayDigit);
-    }
-    return NULL;
-}
-
 static void DigitDisplay_setDigitHardware(int digit)
 {
     if (digit > 99) {
@@ -128,4 +118,13 @@ static void DigitDisplay_setFilesGpioAll(char* fileName, char* value)
         snprintf(filePath, BUFFER_MAX_LENGTH, fileName, gpioDigits[i]);
         Utils_writeFile(filePath, value);
     }
+}
+
+static void* DigitDisplay_threadFunction(void* arg)
+{
+    (void)arg;
+    while(!stopping) {
+        DigitDisplay_setDigitHardware(displayDigit);
+    }
+    return NULL;
 }
