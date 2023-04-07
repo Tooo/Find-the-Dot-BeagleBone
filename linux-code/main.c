@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "shutdown.h"
-#include "system.h"
+#include "utils.h"
 #include "buzzer.h"
 #include "accelerometer.h"
 #include "digitDisplay.h"

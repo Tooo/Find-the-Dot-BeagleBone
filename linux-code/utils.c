@@ -8,9 +8,9 @@
 #include <linux/i2c.h>
 #include <linux/i2c-dev.h>
 
-#include "system.h"
+#include "utils.h"
 
-void System_runCommand(char* command)
+void Utils_runCommand(char* command)
 {
     // Execute the shell command (output into pipe)
     FILE *pipe = popen(command, "r");
@@ -34,7 +34,7 @@ void System_runCommand(char* command)
     }
 }
 
-void System_readFile(char* fileName, char* buffer)
+void Utils_readFile(char* fileName, char* buffer)
 {
     FILE *pFile = fopen(fileName, "r");
     if (pFile == NULL) {
@@ -47,7 +47,7 @@ void System_readFile(char* fileName, char* buffer)
     fclose(pFile);
 }
 
-void System_writeFile(char* fileName, char* buffer)
+void Utils_writeFile(char* fileName, char* buffer)
 {
     FILE *pFile = fopen(fileName, "w");
     if (pFile == NULL) {
@@ -64,7 +64,7 @@ void System_writeFile(char* fileName, char* buffer)
     fclose(pFile);
 }
 
-void System_sleepForMs(long long delayInMs)
+void Utils_sleepForMs(long long delayInMs)
 {
 	static const long long NS_PER_MS = 1000 * 1000;
 	static const long long NS_PER_SECOND = 1000000000;
@@ -77,7 +77,7 @@ void System_sleepForMs(long long delayInMs)
     nanosleep(&reqDelay, (struct timespec *) NULL);
 }
 
-int System_initI2cBus(char* bus, int address)
+int Utils_initI2cBus(char* bus, int address)
 {
 	int i2cFileDesc = open(bus, O_RDWR);
 	if (i2cFileDesc < 0) {
@@ -94,7 +94,7 @@ int System_initI2cBus(char* bus, int address)
 	return i2cFileDesc;
 }
 
-void System_writeI2cReg(int i2cFileDesc, unsigned char regAddr, unsigned char value)
+void Utils_writeI2cReg(int i2cFileDesc, unsigned char regAddr, unsigned char value)
 {
 	unsigned char buff[2];
 	buff[0] = regAddr;
@@ -106,7 +106,7 @@ void System_writeI2cReg(int i2cFileDesc, unsigned char regAddr, unsigned char va
 	}
 }
 
-unsigned char System_readI2cReg(int i2cFileDesc, unsigned char regAddr)
+unsigned char Utils_readI2cReg(int i2cFileDesc, unsigned char regAddr)
 {
 	// To read a register, must first write the address
 	int res = write(i2cFileDesc, &regAddr, sizeof(regAddr));
@@ -125,7 +125,7 @@ unsigned char System_readI2cReg(int i2cFileDesc, unsigned char regAddr)
 	return value;
 }
 
-void System_readMultipleI2cReg(int i2cFileDesc, unsigned char startAddr, unsigned char* buffer, int size)
+void Utils_readMultipleI2cReg(int i2cFileDesc, unsigned char startAddr, unsigned char* buffer, int size)
 {
 	// To read a register, must first write the address
 	int res = write(i2cFileDesc, &startAddr, sizeof(startAddr));

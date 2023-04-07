@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 #include "digitDisplay.h"
-#include "system.h"
+#include "utils.h"
 
 // I2C bus and address
 #define I2CDRV_LINUX_BUS1 "/dev/i2c-1"
@@ -46,15 +46,15 @@ static int displayDigit;
 
 void DigitDisplay_init(void)
 {
-    System_runCommand("config-pin P9_18 i2c");
-    System_runCommand("config-pin P9_17 i2c");
+    Utils_runCommand("config-pin P9_18 i2c");
+    Utils_runCommand("config-pin P9_17 i2c");
 
     DigitDisplay_setFilesGpioAll(GPIO_DIRECTION_FILE, "out");
 
-    i2cFileDesc = System_initI2cBus(I2CDRV_LINUX_BUS1, I2C_DEVICE_ADDRESS);
+    i2cFileDesc = Utils_initI2cBus(I2CDRV_LINUX_BUS1, I2C_DEVICE_ADDRESS);
 
-    System_writeI2cReg(i2cFileDesc, REG_DIRA, 0x00);
-    System_writeI2cReg(i2cFileDesc, REG_DIRB, 0x00);
+    Utils_writeI2cReg(i2cFileDesc, REG_DIRA, 0x00);
+    Utils_writeI2cReg(i2cFileDesc, REG_DIRB, 0x00);
 
     displayDigit = 0;
 
@@ -104,12 +104,12 @@ static void DigitDisplay_setDigitHardware(int digit)
         DigitDisplay_setFilesGpioAll(GPIO_VALUE_FILE, "0");
         
         int digitValue = digitArray[i];
-        System_writeI2cReg(i2cFileDesc, REG_OUTA, bottomPattern[digitValue]);
-        System_writeI2cReg(i2cFileDesc, REG_OUTB, topPattern[digitValue]);
+        Utils_writeI2cReg(i2cFileDesc, REG_OUTA, bottomPattern[digitValue]);
+        Utils_writeI2cReg(i2cFileDesc, REG_OUTB, topPattern[digitValue]);
 
         DigitDisplay_setFilesGpio(GPIO_VALUE_FILE, "1", gpioDigits[i]);
 
-        System_sleepForMs(5);
+        Utils_sleepForMs(5);
     }
     DigitDisplay_setFilesGpioAll(GPIO_VALUE_FILE, "0");
 }
@@ -118,7 +118,7 @@ static void DigitDisplay_setFilesGpio(char* fileName, char* value, int gpio)
 {
     char filePath[BUFFER_MAX_LENGTH];
     snprintf(filePath, BUFFER_MAX_LENGTH, fileName, gpio);
-    System_writeFile(filePath, value);
+    Utils_writeFile(filePath, value);
 }
 
 static void DigitDisplay_setFilesGpioAll(char* fileName, char* value)
@@ -126,6 +126,6 @@ static void DigitDisplay_setFilesGpioAll(char* fileName, char* value)
     for (int i = 0; i < 2; i++) {
         char filePath[BUFFER_MAX_LENGTH];
         snprintf(filePath, BUFFER_MAX_LENGTH, fileName, gpioDigits[i]);
-        System_writeFile(filePath, value);
+        Utils_writeFile(filePath, value);
     }
 }

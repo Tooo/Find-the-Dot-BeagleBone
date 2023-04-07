@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 #include "accelerometer.h"
-#include "system.h"
+#include "utils.h"
 
 // I2c bus and address
 #define I2CDRV_LINUX_BUS1 "/dev/i2c-1"
@@ -31,24 +31,24 @@ static int16_t z;
 
 void Accelerometer_init(void)
 {
-    System_runCommand("config-pin P9_18 i2c");
-    System_runCommand("config-pin P9_17 i2c");
+    Utils_runCommand("config-pin P9_18 i2c");
+    Utils_runCommand("config-pin P9_17 i2c");
 
-    i2cFileDesc = System_initI2cBus(I2CDRV_LINUX_BUS1, I2C_ACCEL_ADDRESS);
+    i2cFileDesc = Utils_initI2cBus(I2CDRV_LINUX_BUS1, I2C_ACCEL_ADDRESS);
 
-    System_writeI2cReg(i2cFileDesc, REG_CTRL_REG1, 0x01);
+    Utils_writeI2cReg(i2cFileDesc, REG_CTRL_REG1, 0x01);
 }
 
 void Accelerometer_cleanup(void)
 {
-    System_writeI2cReg(i2cFileDesc, REG_CTRL_REG1, 0x00);
+    Utils_writeI2cReg(i2cFileDesc, REG_CTRL_REG1, 0x00);
     close(i2cFileDesc);
 }
 
 void Accelerometer_readAndCalculateValues(void)
 {
     unsigned char buffer[ACCEL_REG_COUNT] = {};
-    System_readMultipleI2cReg(i2cFileDesc, REG_STATUS, buffer, ACCEL_REG_COUNT);
+    Utils_readMultipleI2cReg(i2cFileDesc, REG_STATUS, buffer, ACCEL_REG_COUNT);
     x = (buffer[REG_XMSB] << 8) | (buffer[REG_XLSB]);
     y = (buffer[REG_YMSB] << 8) | (buffer[REG_YLSB]);
     z = (buffer[REG_ZMSB] << 8) | (buffer[REG_ZLSB]);

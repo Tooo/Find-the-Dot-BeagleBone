@@ -1,5 +1,5 @@
 #include "buzzer.h"
-#include "system.h"
+#include "utils.h"
 #include <stdio.h>
 
 static char* periodFile = "/dev/bone/pwm/0/a/period";
@@ -11,29 +11,29 @@ static double notes[BUZZER_NOTE_COUNT] = {220, 246.94, 261.63, 293.66, 329.63, 3
 
 void Buzzer_init(void)
 {
-    System_runCommand("config-pin P9_22 pwm");
+    Utils_runCommand("config-pin P9_22 pwm");
 }
 
 void Buzzer_cleanup(void)
 {
     // To confirm the buzzer is not playing
-    System_writeFile(enableFile, "0");
+    Utils_writeFile(enableFile, "0");
 }
 
 void Buzzer_play(int period, int dutyCycle, int timeInMs)
 {
     char periodStr[BUFFER_MAX_LENGTH];
     snprintf(periodStr, BUFFER_MAX_LENGTH, "%d", period);
-    System_writeFile(periodFile, periodStr);
+    Utils_writeFile(periodFile, periodStr);
 
     char dutyCycleStr[BUFFER_MAX_LENGTH];
     snprintf(dutyCycleStr, BUFFER_MAX_LENGTH, "%d", dutyCycle);
-    System_writeFile(dutyCycleFile, dutyCycleStr);
-    System_writeFile(enableFile, "1");
+    Utils_writeFile(dutyCycleFile, dutyCycleStr);
+    Utils_writeFile(enableFile, "1");
 
-    System_sleepForMs(timeInMs);
+    Utils_sleepForMs(timeInMs);
 
-    System_writeFile(enableFile, "0");
+    Utils_writeFile(enableFile, "0");
 }
 
 void Buzzer_playNote(BuzzerNoteId noteId, int timeInMs)
