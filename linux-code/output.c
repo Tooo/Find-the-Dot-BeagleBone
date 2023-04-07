@@ -8,6 +8,8 @@
 #include "utils.h"
 #include "accelerometer.h"
 
+#include "shutdown.h" // temp
+
 // Output Thread
 static pthread_t outputThread;
 static void* Output_threadFunction(void* args);
@@ -34,9 +36,12 @@ static void Output_printAccelerator()
 static void* Output_threadFunction(void* args)
 {
     (void)args;
-    while (!stopping) {
+    (void)stopping; // temp
+    //while (!stopping) {
+    for (int i = 0; i < 10; i++) { // temp
         Output_printAccelerator();
         Utils_sleepForMs(threadSleepMs);
     }
+    Shutdown_trigger();
     return NULL;
 }
