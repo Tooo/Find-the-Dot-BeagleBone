@@ -18,20 +18,20 @@ static bool newSound;
 
 // Pattern for hit
 static int hitSound[SOUND_LENGTH][SOUND_ARG_LENGTH] = {
-    {(int)BUZZER_NOTE_A, 500}, 
-    {(int)BUZZER_NOTE_B, 500}, 
-    {(int)BUZZER_NOTE_C, 500}, 
-    {(int)BUZZER_NOTE_D, 500},
-    {(int)BUZZER_NOTE_D, 500}
+    {(int)BUZZER_NOTE_C, 200}, 
+    {(int)BUZZER_NOTE_D, 200}, 
+    {(int)BUZZER_NOTE_E, 200}, 
+    {(int)BUZZER_NOTE_F, 200},
+    {(int)BUZZER_NOTE_G, 200}
 };
 
 // Pattern for miss
 static int missSound[SOUND_LENGTH][SOUND_ARG_LENGTH] = {
-    {(int)BUZZER_NOTE_D, 500}, 
-    {(int)BUZZER_NOTE_A, 500}, 
-    {(int)BUZZER_NOTE_D, 500}, 
-    {(int)BUZZER_NOTE_A, 500},
-    {(int)BUZZER_NOTE_D, 500}
+    {(int)BUZZER_NOTE_D, 100}, 
+    {(int)BUZZER_NOTE_D, 100}, 
+    {(int)BUZZER_NOTE_D, 100}, 
+    {(int)BUZZER_NOTE_D, 100},
+    {(int)BUZZER_NOTE_A, 500}
 };
 
 void BuzzerPlayer_init(void)
@@ -50,6 +50,10 @@ void BuzzerPlayer_cleanup(void)
 
 void BuzzerPlayer_playSound(BuzzerPlayerEnum sound)
 {
+    if (sound >= BUZZER_PLAYER_COUNT) {
+        return;
+    }
+
     if (sound == BUZZER_PLAYER_HIT) {
         currentSound = hitSound;
     } else if (sound == BUZZER_PLAYER_MISS) {
