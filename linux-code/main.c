@@ -5,6 +5,7 @@
 #include "shutdown.h"
 #include "utils.h"
 #include "buzzer.h"
+#include "buzzerPlayer.h"
 #include "accelerometer.h"
 #include "digitDisplay.h"
 #include "output.h"
@@ -25,6 +26,7 @@ static void main_init(void)
 {
     Accelerometer_init();
     Buzzer_init();
+    BuzzerPlayer_init();
     DigitDisplay_init();
     Output_init();
     
@@ -34,6 +36,7 @@ static void main_cleanup(void)
 {
     Output_cleanup();
     DigitDisplay_cleanup();
+    BuzzerPlayer_cleanup();
     Buzzer_cleanup();
     Accelerometer_cleanup();
 }
