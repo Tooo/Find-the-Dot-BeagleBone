@@ -20,17 +20,16 @@ all: nested-cross-compile pru-copy
 # Cross compile your C/C++ programs
 # Uncommet this for any folder you want to cross-compile
 nested-cross-compile:
-	@make --directory=linux-code
-	@make --directory=tests
+	@# make --directory=your-project-subdirectory-name-here
+	@# make --directory=logicAnalyzer-Linux
 
 pru-copy:
-	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot
-	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot/14seg && cp -r pru-code/* $(HOME)/cmpt433/public/pru/find-the-dot/14seg
-	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot/neoSample && cp -r neoSample/* $(HOME)/cmpt433/public/pru/find-the-dot/neoSample
+	mkdir -p $(HOME)/cmpt433/public/pru/
+	cp -r * $(HOME)/cmpt433/public/pru/
 	@echo "COPY ONLY" > $(HOME)/cmpt433/public/pru/_COPY_ONLY_
 	@echo ""
 	@echo "You must build the PRU code on the target, then install it:"
-	@echo "(bbg)$$ cd /mount/remote/pru/find-the-dot/"
+	@echo "(bbg)$$ cd /mount/remote/pru/<your-folder>/"
 	@echo "(bbg)$$ make"
 	@echo "(bbg)$$ sudo make install_PRU0"
 endif
