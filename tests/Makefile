@@ -10,9 +10,14 @@ all: test_folder test
 test_folder: 
 	mkdir -p $(OUTDIR)
 
-TESTS = test_buzzer
+TESTS = test_buzzer test_digitDisplay
 test: $(TESTS)
 
 TEST_BUZZER_FILES = $(LINUX_CODE)/utils.c $(LINUX_CODE)/buzzer.c test_buzzer.c
 test_buzzer:
 	$(CC_C) $(CFLAGS) $(TEST_BUZZER_FILES) -o $(OUTDIR)/test_buzzer
+
+
+TEST_DIGIT_DISPLAY_FILES = $(LINUX_CODE)/utils.c $(LINUX_CODE)/digitDisplay.c test_digitDisplay.c
+test_digitDisplay:
+	$(CC_C) $(CFLAGS) $(TEST_DIGIT_DISPLAY_FILES) -o $(OUTDIR)/test_digitDisplay
