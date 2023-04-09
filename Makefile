@@ -21,14 +21,15 @@ all: nested-cross-compile pru-copy
 # Uncommet this for any folder you want to cross-compile
 nested-cross-compile:
 	@make --directory=linux-code
+	@make --directory=tests
 
 pru-copy:
-	mkdir -p $(HOME)/cmpt433/public/pru/
-	cp -r * $(HOME)/cmpt433/public/pru/
+	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot
+	cp -r pru-code/* $(HOME)/cmpt433/public/pru/find-the-dot
 	@echo "COPY ONLY" > $(HOME)/cmpt433/public/pru/_COPY_ONLY_
 	@echo ""
 	@echo "You must build the PRU code on the target, then install it:"
-	@echo "(bbg)$$ cd /mount/remote/pru/<your-folder>/"
+	@echo "(bbg)$$ cd /mount/remote/pru/find-the-dot/"
 	@echo "(bbg)$$ make"
 	@echo "(bbg)$$ sudo make install_PRU0"
 endif
