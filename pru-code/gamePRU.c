@@ -87,7 +87,7 @@ uint32_t color[STR_LEN] = {
 };
 
 // Refer back the sharedGameStruct neoColors enum
-#define NUM_OF_COLORS 6
+#define NUM_OF_COLORS 7
 uint32_t gameColors[NUM_OF_COLORS] = {
     0x000f0000, // Red
     0x00ff0000, // Red Bright
