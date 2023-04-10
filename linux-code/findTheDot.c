@@ -5,11 +5,15 @@
 #include "shutdown.h"
 #include "utils.h"
 #include "accelerometer.h"
+#include "buzzerPlayer.h"
+#include "digitDisplay.h"
 
 #define RANDOM_MAX 1
 #define RANDOM_RANGE 0.5
-double dotX;
-double dotY;
+static double dotX;
+static double dotY;
+
+static int hitCount;
 
 // Output Thread
 static pthread_t findTheDotThread;
@@ -18,6 +22,7 @@ static bool stopping;
 
 void FindTheDot_init(void)
 {
+    hitCount = 0;
     stopping = false;
     pthread_create(&findTheDotThread, NULL, &FindTheDot_threadFunction, NULL);
 }
@@ -36,6 +41,20 @@ static void FindTheDot_generateDot()
     dotX = x + Utils_randomDouble() * RANDOM_MAX - RANDOM_RANGE;
     dotY = y + Utils_randomDouble() * RANDOM_MAX - RANDOM_RANGE;
 }
+
+static void FindTheDot_hit()
+{
+    hitCount++;
+    DigitDisplay_setDigit(hitCount);
+    BuzzerPlayer_playSound(BUZZER_PLAYER_HIT);
+    FindTheDot_generateDot();
+}
+
+static void FindTheDot_miss()
+{
+    BuzzerPlayer_playSound(BUZZER_PLAYER_MISS);
+}
+
 
 static void* FindTheDot_threadFunction(void* args)
 {
