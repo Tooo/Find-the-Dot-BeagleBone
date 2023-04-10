@@ -9,6 +9,7 @@
 #include "accelerometer.h"
 #include "digitDisplay.h"
 #include "output.h"
+#include "findTheDot.h"
 
 // Initialize/cleanup the module's data structures.
 static void main_init(void);
@@ -29,11 +30,13 @@ static void main_init(void)
     BuzzerPlayer_init();
     DigitDisplay_init();
     Output_init();
+    FindTheDot_init();
     
 }
 
 static void main_cleanup(void)
 {
+    FindTheDot_cleanup();
     Output_cleanup();
     DigitDisplay_cleanup();
     BuzzerPlayer_cleanup();
