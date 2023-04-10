@@ -7,6 +7,7 @@
 #include "output.h"
 #include "utils.h"
 #include "accelerometer.h"
+#include "findTheDot.h"
 
 #include "shutdown.h" // temp
 
@@ -30,7 +31,8 @@ void Output_cleanup(void)
 
 static void Output_printAccelerator()
 {
-    printf("X: %f, Y: %f\n", Accelerometer_getX(), Accelerometer_getY());
+    printf("(X,Y) - Accel: (%0.3f, %0.3f)", Accelerometer_getX(), Accelerometer_getY());
+    printf(" Dot: (%0.3f, %0.3f)\n", FindTheDot_getDotX(), FindTheDot_getDotY());
 }
 
 static void* Output_threadFunction(void* args)

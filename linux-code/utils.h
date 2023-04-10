@@ -20,4 +20,8 @@ void Utils_writeI2cReg(int i2cFileDesc, unsigned char regAddr, unsigned char val
 unsigned char Utils_readI2cReg(int i2cFileDesc, unsigned char regAddr);
 void Utils_readMultipleI2cReg(int i2cFileDesc, unsigned char startAddr, unsigned char* buffer, int size);
 
+// Random functions
+void Utils_randomInit();
+double Utils_randomDouble();
+
 #endif
