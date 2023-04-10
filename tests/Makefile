@@ -10,7 +10,7 @@ all: test_folder test
 test_folder: 
 	mkdir -p $(OUTDIR)
 
-TESTS = test_buzzer test_buzzerPlayer test_digitDisplay
+TESTS = test_buzzer test_buzzerPlayer test_digitDisplay test_pruLED
 test: $(TESTS)
 
 TEST_BUZZER_FILES = $(LINUX_CODE)/utils.c $(LINUX_CODE)/buzzer.c test_buzzer.c
@@ -24,3 +24,7 @@ test_buzzerPlayer:
 TEST_DIGIT_DISPLAY_FILES = $(LINUX_CODE)/utils.c $(LINUX_CODE)/digitDisplay.c test_digitDisplay.c
 test_digitDisplay:
 	$(CC_C) $(CFLAGS) $(TEST_DIGIT_DISPLAY_FILES) -o $(OUTDIR)/test_digitDisplay
+
+TEST_PRU_LED_FILES = $(LINUX_CODE)/linuxToPru.c test_pruLED.c
+test_pruLED:
+	$(CC_C) $(CFLAGS) $(TEST_PRU_LED_FILES) -o $(OUTDIR)/test_pru
