@@ -7,6 +7,7 @@
 #include <sys/ioctl.h>
 #include <linux/i2c.h>
 #include <linux/i2c-dev.h>
+#include <time.h>
 
 #include "utils.h"
 
@@ -140,4 +141,15 @@ void Utils_readMultipleI2cReg(int i2cFileDesc, unsigned char startAddr, unsigned
 		perror("Unable to read i2c register");
 		exit(-1);
 	}
+}
+
+void Utils_randomInit()
+{
+	time_t t;
+	srand(time(&t));
+}
+
+double Utils_randomDouble()
+{
+	return (double) rand() / (double) RAND_MAX;
 }

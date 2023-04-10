@@ -7,4 +7,7 @@
 void FindTheDot_init(void);
 void FindTheDot_cleanup(void);
 
+double FindTheDot_getDotX();
+double FindTheDot_getDotY();
+
 #endif
