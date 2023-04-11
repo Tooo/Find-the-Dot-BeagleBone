@@ -11,6 +11,7 @@
 #include "output.h"
 #include "utils.h"
 #include "findTheDot.h"
+#include "linuxToPru.h"
 
 // Initialize/cleanup the module's data structures.
 static void main_init(void);
@@ -26,14 +27,14 @@ int main(void)
 
 static void main_init(void)
 {
+    LinuxToPru_init();
     Accelerometer_init();
+    Utils_randomInit();
     Buzzer_init();
     BuzzerPlayer_init();
     DigitDisplay_init();
     Output_init();
-    Utils_randomInit();
     FindTheDot_init();
-    
 }
 
 static void main_cleanup(void)
@@ -44,4 +45,5 @@ static void main_cleanup(void)
     BuzzerPlayer_cleanup();
     Buzzer_cleanup();
     Accelerometer_cleanup();
+    LinuxToPru_cleanup();
 }
