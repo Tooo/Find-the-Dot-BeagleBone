@@ -26,9 +26,7 @@ nested-cross-compile:
 pru-copy:
 	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot
 	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot/pru-code && cp -r pru-code/* $(HOME)/cmpt433/public/pru/find-the-dot/pru-code
-	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot/linux-code && cp -r linux-code/* $(HOME)/cmpt433/public/pru/find-the-dot/linux-code
-	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot/neoSample && cp -r neoSample/* $(HOME)/cmpt433/public/pru/find-the-dot/neoSample
-	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot/neoSample-linux && cp -r neoSample-linux/* $(HOME)/cmpt433/public/pru/find-the-dot/neoSample-linux
+	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot/linux-code && cp -r linux-code/sharedGameStruct.h $(HOME)/cmpt433/public/pru/find-the-dot/linux-code
 	@echo "COPY ONLY" > $(HOME)/cmpt433/public/pru/_COPY_ONLY_
 	@echo ""
 	@echo "You must build the PRU code on the target, then install it:"
