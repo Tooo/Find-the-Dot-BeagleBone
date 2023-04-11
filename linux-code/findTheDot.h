@@ -31,11 +31,15 @@ typedef enum {
 void FindTheDot_init(void);
 void FindTheDot_cleanup(void);
 
+// Get Dot X and Y
 double FindTheDot_getDotX();
 double FindTheDot_getDotY();
 
+// Get Total Hit Count
+int FindTheDot_getHitCount();
+
+// Get X and Y LED Enums
 XLedEnum FindTheDot_getXLedEnum();
 YLedEnum FindTheDot_getYLedEnum();
-
 
 #endif

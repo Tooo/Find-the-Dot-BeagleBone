@@ -103,6 +103,11 @@ double FindTheDot_getDotY()
     return dotY;
 }
 
+int FindTheDot_getHitCount()
+{
+    return hitCount;
+}
+
 XLedEnum FindTheDot_getXLedEnum()
 {
     double x = Accelerometer_getX();
