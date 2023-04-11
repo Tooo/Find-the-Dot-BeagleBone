@@ -126,11 +126,11 @@ YLedEnum FindTheDot_getYLedEnum()
     double y = Accelerometer_getY();
 
     for (int i = 5; i >= 0; i--) {
-        if (dotY - y > HIT_RANGE*i) {
+        if (y - dotY > HIT_RANGE*i) {
             return Y_CENTRE - i;
         }
 
-        if (y - dotY > HIT_RANGE*i) {
+        if (dotY - y > HIT_RANGE*i) {
             return Y_CENTRE + i;
         }
 
