@@ -44,11 +44,8 @@ void FindTheDot_cleanup(void)
 
 static void FindTheDot_generateDot()
 {
-    double x = Accelerometer_getX();
-    double y = Accelerometer_getY();
-
-    dotX = x + Utils_randomDouble() * RANDOM_MAX - RANDOM_RANGE;
-    dotY = y + Utils_randomDouble() * RANDOM_MAX - RANDOM_RANGE;
+    dotX = Utils_randomDouble() * RANDOM_MAX - RANDOM_RANGE;
+    dotY = Utils_randomDouble() * RANDOM_MAX - RANDOM_RANGE;
 }
 
 static void FindTheDot_hit()
