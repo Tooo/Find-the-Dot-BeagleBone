@@ -38,12 +38,18 @@ static void Output_printJoystick()
     printf(" Joystick: D:%d, R:%d", LinuxToPru_isJoystickDown(), LinuxToPru_isJoystickRight());
 }
 
+static void Output_printLed()
+{
+    printf(" LED: (%d, %d)", FindTheDot_getXLedEnum(), FindTheDot_getYLedEnum());
+}
+
 static void* Output_threadFunction(void* args)
 {
     (void)args;
     while (!stopping) {
         Output_printAccelerator();
         Output_printJoystick();
+        Output_printLed();
         printf("\n");
         Utils_sleepForMs(threadSleepMs);
     }

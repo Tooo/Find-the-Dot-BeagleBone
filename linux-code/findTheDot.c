@@ -63,21 +63,26 @@ static void FindTheDot_miss()
     BuzzerPlayer_playSound(BUZZER_PLAYER_MISS);
 }
 
+// static void FindTheDot_updateNeo()
+// {
+//     XLedEnum xEnum = FindTheDot_getXLedEnum();
+//     YLedEnum yEnum = FindTheDot_getYLedEnum();
+// }
 
 static void* FindTheDot_threadFunction(void* args)
 {
     (void)args;
     while (!stopping && !LinuxToPru_isJoystickRight()) {
+        //FindTheDot_updateNeo();
         if (!LinuxToPru_isJoystickDown()) {
             Utils_sleepForMs(sleepInMs);
             continue;
         }
 
-        double x = Accelerometer_getX();
-        double y = Accelerometer_getY();
+        XLedEnum xEnum = FindTheDot_getXLedEnum();
+        YLedEnum yEnum = FindTheDot_getYLedEnum();
 
-        if (x - dotX < HIT_RANGE && dotX - x < HIT_RANGE && 
-            y - dotY < HIT_RANGE && dotY - y < HIT_RANGE ) {
+        if (xEnum == X_CENTRE && yEnum == Y_CENTRE) {
             FindTheDot_hit();
         } else {
             FindTheDot_miss();
@@ -97,4 +102,35 @@ double FindTheDot_getDotX()
 double FindTheDot_getDotY()
 {
     return dotY;
+}
+
+XLedEnum FindTheDot_getXLedEnum()
+{
+    double x = Accelerometer_getX();
+
+    if (x - dotX > HIT_RANGE) {
+        return X_LEFT;
+    } else if (dotX - x > HIT_RANGE) {
+        return X_RIGHT;
+    } else {
+        return X_CENTRE;
+    }
+}
+
+YLedEnum FindTheDot_getYLedEnum()
+{
+    double y = Accelerometer_getY();
+
+    for (int i = 5; i >= 0; i--) {
+        if (dotY - y > HIT_RANGE*i) {
+            return Y_CENTRE - i;
+        }
+
+        if (y - dotY > HIT_RANGE*i) {
+            return Y_CENTRE + i;
+        }
+
+    }
+    
+    return Y_CENTRE;
 }
