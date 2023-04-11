@@ -21,7 +21,7 @@ all: nested-cross-compile pru-copy
 # Uncommet this for any folder you want to cross-compile
 nested-cross-compile:
 	@make --directory=linux-code
-	@make --directory=tests
+#	@make --directory=tests
 
 pru-copy:
 	mkdir -p $(HOME)/cmpt433/public/pru/find-the-dot
