@@ -4,6 +4,11 @@
 #include "../linux-code/linuxToPru.h"
 #include "../linux-code/sharedGameStruct.h"
 
+// Pins the need to be configed
+// config-pin p8_15 pruin for joystick right
+// config-pin p8_16 pruin for joystick down
+// config-pin p8_11 pruout for neo
+
 int main(void)
 {
     uint8_t colors[8] = {
@@ -26,10 +31,33 @@ int main(void)
         GREEN_BRIGHT,
         RED_BRIGHT,
     };
+    uint8_t colorElse[8] = {
+        RED,
+        GREEN,
+        RED,
+        GREEN,
+        RED,
+        GREEN,
+        RED,
+        GREEN,
+    };
     LinuxToPru_init();
-    LinuxToPru_setNeoPixel(colors);
+    while (true)
+    {
+        if (LinuxToPru_isJoystickDown())
+        {
+            LinuxToPru_setNeoPixel(colors);
+        }
+        else if (LinuxToPru_isJoystickRight())
+        {
+            LinuxToPru_setNeoPixel(colorChange);
+        } 
+        else 
+        {
+            LinuxToPru_setNeoPixel(colorElse);
+        }
+    }
     sleep(2);
-    LinuxToPru_setNeoPixel(colorChange);
 
     LinuxToPru_cleanup();
 

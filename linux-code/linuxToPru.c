@@ -76,10 +76,10 @@ void LinuxToPru_setNeoPixel(uint8_t *colors)
 
 bool LinuxToPru_isJoystickDown(void)
 {
-    return pSharedPru0->joystickDownPressed;
+    return !pSharedPru0->joystickDownPressed;
 }
 
 bool LinuxToPru_isJoystickRight(void)
 {
-    return pSharedPru0->joystickRightPressed;
+    return !pSharedPru0->joystickRightPressed;
 }

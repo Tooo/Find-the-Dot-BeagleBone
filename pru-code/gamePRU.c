@@ -51,6 +51,7 @@ volatile register uint32_t __R31;
 //   = JSRT (Joystick Right) on Zen Cape
 //   (Happens to be bit 15 and p8_15; just a coincidence; see P8 header info sheet)
 #define JOYSTICK_RIGHT_MASK (1 << 15)
+#define JOYSTICK_DOWN_MASK (1 << 14)
 
 // Shared Memory Configuration
 // -----------------------------------------------------------
@@ -103,6 +104,10 @@ void main(void)
     // Clear SYSCFG[STANDBY_INIT] to enable OCP master port
     CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
 
+    pSharedMemStruct->joystickDownPressed = false;
+    pSharedMemStruct->joystickRightPressed = false;
+
+
     while (true)
     {
         __delay_cycles(resetCycles);
@@ -132,7 +137,8 @@ void main(void)
         __R30 &= ~(0x1 << DATA_PIN); // Clear the GPIO pin
         __delay_cycles(resetCycles);
 
-        //pSharedMemStruct->isButtonPressed = (__R31 & JOYSTICK_RIGHT_MASK) != 0;
+        pSharedMemStruct->joystickRightPressed = (__R31 & JOYSTICK_RIGHT_MASK) != 0;
+        pSharedMemStruct->joystickDownPressed = (__R31 & JOYSTICK_DOWN_MASK) != 0;
 
     }
 
