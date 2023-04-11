@@ -8,6 +8,7 @@
 #include "buzzerPlayer.h"
 #include "digitDisplay.h"
 #include "linuxToPru.h"
+#include "neoPixel.h"
 
 #define RANDOM_MAX 1
 #define RANDOM_RANGE 0.5
@@ -63,17 +64,18 @@ static void FindTheDot_miss()
     BuzzerPlayer_playSound(BUZZER_PLAYER_MISS);
 }
 
-// static void FindTheDot_updateNeo()
-// {
-//     XLedEnum xEnum = FindTheDot_getXLedEnum();
-//     YLedEnum yEnum = FindTheDot_getYLedEnum();
-// }
+static void FindTheDot_updateNeo()
+{
+    XLedEnum xEnum = FindTheDot_getXLedEnum();
+    YLedEnum yEnum = FindTheDot_getYLedEnum();
+    NeoPixel_setLeds(xEnum, yEnum);
+}
 
 static void* FindTheDot_threadFunction(void* args)
 {
     (void)args;
     while (!stopping && !LinuxToPru_isJoystickRight()) {
-        //FindTheDot_updateNeo();
+        FindTheDot_updateNeo();
         if (!LinuxToPru_isJoystickDown()) {
             Utils_sleepForMs(sleepInMs);
             continue;
@@ -131,6 +133,6 @@ YLedEnum FindTheDot_getYLedEnum()
         }
 
     }
-    
+
     return Y_CENTRE;
 }
