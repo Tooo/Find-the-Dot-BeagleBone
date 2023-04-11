@@ -10,12 +10,14 @@
 #include "linuxToPru.h"
 #include "neoPixel.h"
 
+// Random and Hit Range values
 #define RANDOM_MAX 1
 #define RANDOM_RANGE 0.5
 #define HIT_RANGE 0.1
+
+// Game Variables
 static double dotX;
 static double dotY;
-
 static int hitCount;
 
 // Output Thread

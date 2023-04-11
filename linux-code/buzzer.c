@@ -2,6 +2,7 @@
 #include "utils.h"
 #include <stdio.h>
 
+// Buzzer files
 static char* periodFile = "/dev/bone/pwm/0/a/period";
 static char* dutyCycleFile = "/dev/bone/pwm/0/a/duty_cycle";
 static char* enableFile = "/dev/bone/pwm/0/a/enable";
