@@ -25,6 +25,6 @@ TEST_DIGIT_DISPLAY_FILES = $(LINUX_CODE)/utils.c $(LINUX_CODE)/digitDisplay.c te
 test_digitDisplay:
 	$(CC_C) $(CFLAGS) $(TEST_DIGIT_DISPLAY_FILES) -o $(OUTDIR)/test_digitDisplay
 
-TEST_PRU_LED_FILES = $(LINUX_CODE)/linuxToPru.c test_pruLED.c
+TEST_PRU_LED_FILES = $(LINUX_CODE)/utils.c $(LINUX_CODE)/linuxToPru.c test_pruLED.c 
 test_pruLED:
 	$(CC_C) $(CFLAGS) $(TEST_PRU_LED_FILES) -o $(OUTDIR)/test_pru

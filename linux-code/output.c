@@ -8,8 +8,7 @@
 #include "utils.h"
 #include "accelerometer.h"
 #include "findTheDot.h"
-
-#include "shutdown.h" // temp
+#include "linuxToPru.h"
 
 // Output Thread
 static pthread_t outputThread;
@@ -31,19 +30,34 @@ void Output_cleanup(void)
 
 static void Output_printAccelerator()
 {
-    printf("(X,Y) - Accel: (%0.3f, %0.3f)", Accelerometer_getX(), Accelerometer_getY());
-    printf(" Dot: (%0.3f, %0.3f)\n", FindTheDot_getDotX(), FindTheDot_getDotY());
+    printf("(X,Y) - Accel: (%5.2f, %5.2f)", Accelerometer_getX(), Accelerometer_getY());
+    printf(" Dot: (%5.2f, %5.2f)", FindTheDot_getDotX(), FindTheDot_getDotY());
+}
+static void Output_printJoystick()
+{
+    printf(" Joystick: D:%d, R:%d", LinuxToPru_isJoystickDown(), LinuxToPru_isJoystickRight());
+}
+
+static void Output_printLed()
+{
+    printf(" LED: (%d, %2d)", FindTheDot_getXLedEnum(), FindTheDot_getYLedEnum());
+}
+
+static void Output_printHit()
+{
+    printf(" Hit: %d", FindTheDot_getHitCount());
 }
 
 static void* Output_threadFunction(void* args)
 {
     (void)args;
-    (void)stopping; // temp
-    //while (!stopping) {
-    for (int i = 0; i < 10; i++) { // temp
+    while (!stopping) {
         Output_printAccelerator();
+        Output_printJoystick();
+        Output_printLed();
+        Output_printHit();
+        printf("\n");
         Utils_sleepForMs(threadSleepMs);
     }
-    Shutdown_trigger();
     return NULL;
 }

@@ -14,6 +14,7 @@ typedef enum {
 void BuzzerPlayer_init(void);
 void BuzzerPlayer_cleanup(void);
 
+// Play game sound
 void BuzzerPlayer_playSound(BuzzerPlayerEnum sound);
 
 #endif
