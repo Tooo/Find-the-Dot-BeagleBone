@@ -5,6 +5,7 @@
 
 #include "findTheDot.h"
 
+// Set NeoPixel leds for game
 void NeoPixel_setLeds(XLedEnum xEnum, YLedEnum yEnum);
 
 #endif

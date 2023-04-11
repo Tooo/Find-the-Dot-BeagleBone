@@ -12,6 +12,7 @@ void Utils_runCommand(char* command);
 void Utils_readFile(char* fileName, char* buffer);
 void Utils_writeFile(char* fileName, char* buffer);
 
+// Sleep function
 void Utils_sleepForMs(long long delayInMs);
 
 // I2C functions

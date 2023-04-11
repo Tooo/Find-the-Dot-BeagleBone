@@ -4,18 +4,21 @@
 #include "linuxToPru.h"
 #include "sharedGameStruct.h"
 
+// Colors used for LED
 neoColors xColor[X_COUNT] = {
     RED,
     BLUE,
     GREEN
 };
 
+// Bright Colors used for LED
 neoColors xColorBright[X_COUNT] = {
     RED_BRIGHT,
     BLUE_BRIGHT,
     GREEN_BRIGHT
 };
 
+// Enum for LED Brightness
 typedef enum {
     LED_OFF,
     LED_BRIGHT,
@@ -23,6 +26,7 @@ typedef enum {
     LED_COUNT
 } LedBrightnessEnum;
 
+// Up 5 Array
 LedBrightnessEnum up5Array[NUM_OF_LEDS] = {
     LED_OFF,
     LED_OFF,
@@ -34,6 +38,7 @@ LedBrightnessEnum up5Array[NUM_OF_LEDS] = {
     LED_DIM,
 };
 
+// Up 4 Array
 LedBrightnessEnum up4Array[NUM_OF_LEDS] = {
     LED_OFF,
     LED_OFF,
@@ -45,6 +50,7 @@ LedBrightnessEnum up4Array[NUM_OF_LEDS] = {
     LED_BRIGHT,
 };
 
+// Up 3 Array
 LedBrightnessEnum up3Array[NUM_OF_LEDS] = {
     LED_OFF,
     LED_OFF,
@@ -56,6 +62,8 @@ LedBrightnessEnum up3Array[NUM_OF_LEDS] = {
     LED_DIM,
 };
 
+
+// Up 2 Array
 LedBrightnessEnum up2Array[NUM_OF_LEDS] = {
     LED_OFF,
     LED_OFF,
@@ -67,6 +75,7 @@ LedBrightnessEnum up2Array[NUM_OF_LEDS] = {
     LED_OFF,
 };
 
+// Up Array
 LedBrightnessEnum upArray[NUM_OF_LEDS] = {
     LED_OFF,
     LED_OFF,
@@ -78,6 +87,7 @@ LedBrightnessEnum upArray[NUM_OF_LEDS] = {
     LED_OFF,
 };
 
+// Centre Array
 LedBrightnessEnum centreArray[NUM_OF_LEDS] = {
     LED_DIM,
     LED_DIM,
@@ -89,6 +99,7 @@ LedBrightnessEnum centreArray[NUM_OF_LEDS] = {
     LED_DIM,
 };
 
+// Down Array
 LedBrightnessEnum downArray[NUM_OF_LEDS] = {
     LED_OFF,
     LED_OFF,
@@ -100,6 +111,7 @@ LedBrightnessEnum downArray[NUM_OF_LEDS] = {
     LED_OFF,
 };
 
+// Down 2 Array
 LedBrightnessEnum down2Array[NUM_OF_LEDS] = {
     LED_OFF,
     LED_DIM,
@@ -111,6 +123,7 @@ LedBrightnessEnum down2Array[NUM_OF_LEDS] = {
     LED_OFF,
 };
 
+// Down 3 Array
 LedBrightnessEnum down3Array[NUM_OF_LEDS] = {
     LED_DIM,
     LED_BRIGHT,
@@ -122,6 +135,7 @@ LedBrightnessEnum down3Array[NUM_OF_LEDS] = {
     LED_OFF,
 };
 
+// Down 4 Array
 LedBrightnessEnum down4Array[NUM_OF_LEDS] = {
     LED_BRIGHT,
     LED_DIM,
@@ -133,6 +147,7 @@ LedBrightnessEnum down4Array[NUM_OF_LEDS] = {
     LED_OFF,
 };
 
+// Down 5 Array
 LedBrightnessEnum down5Array[NUM_OF_LEDS] = {
     LED_DIM,
     LED_OFF,
@@ -144,6 +159,7 @@ LedBrightnessEnum down5Array[NUM_OF_LEDS] = {
     LED_OFF,
 };
 
+// Led Arrays
 LedBrightnessEnum* ledArrays[Y_COUNT] = {
     up5Array,
     up4Array,
