@@ -22,8 +22,7 @@ static int hitCount;
 static pthread_t findTheDotThread;
 static void* FindTheDot_threadFunction(void* args);
 static bool stopping;
-static int sleepInMs = 10;
-static int pressedSleepInMs = 100;
+static int sleepInMs = 100;
 
 static void FindTheDot_generateDot();
 
@@ -73,8 +72,9 @@ static void* FindTheDot_threadFunction(void* args)
     (void)args;
     while (!stopping && !LinuxToPru_isJoystickRight()) {
         FindTheDot_updateNeo();
+        Utils_sleepForMs(sleepInMs);
+
         if (!LinuxToPru_isJoystickDown()) {
-            Utils_sleepForMs(sleepInMs);
             continue;
         }
 
@@ -86,8 +86,6 @@ static void* FindTheDot_threadFunction(void* args)
         } else {
             FindTheDot_miss();
         }
-
-        Utils_sleepForMs(pressedSleepInMs);
     }
     Shutdown_trigger();
     return NULL;
