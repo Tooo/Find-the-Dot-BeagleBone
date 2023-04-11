@@ -60,12 +60,17 @@ void LinuxToPru_init(void)
     Utils_runCommand("config-pin p8_15 pruin");
     Utils_runCommand("config-pin p8_16 pruin");
     Utils_runCommand("config-pin p8_11 pruout");
+
     pPruBase = getPruMmapAddr();
     pSharedPru0 = PRU0_MEM_FROM_BASE(pPruBase);
 }
 
 void LinuxToPru_cleanup(void)
 {
+    for (int i = 0; i < NUM_OF_LEDS; i++)
+    {
+        pSharedPru0->neoLeds[i] = OFF;
+    }
     freePruMmapAddr(pPruBase);
 }
 
