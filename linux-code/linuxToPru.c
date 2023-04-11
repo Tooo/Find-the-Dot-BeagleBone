@@ -57,6 +57,9 @@ void freePruMmapAddr(volatile void* pPruBaseLocal)
 
 void LinuxToPru_init(void)
 {
+    Utils_runCommand("config-pin p8_15 pruin");
+    Utils_runCommand("config-pin p8_16 pruin");
+    Utils_runCommand("config-pin p8_11 pruout");
     pPruBase = getPruMmapAddr();
     pSharedPru0 = PRU0_MEM_FROM_BASE(pPruBase);
 }
